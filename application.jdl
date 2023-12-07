@@ -1,0 +1,18 @@
+application {
+  config {
+    applicationType monolith
+    baseName AutoMaat
+    authenticationType jwt
+    buildTool maven
+    cacheProvider no
+    clientFramework angularX
+    clientPackageManager npm
+    databaseType sql
+    prodDatabaseType mysql
+    devDatabaseType h2Memory
+    languages [en, nl]
+    packageName nl.hanze.se4.automaat
+  }
+  service * with serviceClass
+  paginate * with pagination
+}
