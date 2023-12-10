@@ -1,0 +1,29 @@
+{
+  "applications": "*",
+  "changelogDate": "20231207121432",
+  "entityTableName": "route_stop",
+  "fields": [
+    {
+      "fieldName": "nr",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "RouteStop",
+  "relationships": [
+    {
+      "otherEntityName": "route",
+      "otherEntityRelationshipName": "routeStop",
+      "relationshipName": "route",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "location",
+      "otherEntityRelationshipName": "routeStop",
+      "relationshipName": "location",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

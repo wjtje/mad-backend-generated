@@ -1,0 +1,28 @@
+{
+  "autoMaatApp": {
+    "route": {
+      "home": {
+        "title": "Routes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Maak een nieuwe Route",
+        "createOrEditLabel": "Maak of wijzig een Route",
+        "notFound": "No Routes found"
+      },
+      "created": "A new Route is created with identifier {{ param }}",
+      "updated": "A Route is updated with identifier {{ param }}",
+      "deleted": "A Route is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Route {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Route"
+      },
+      "id": "ID",
+      "code": "Code",
+      "description": "Description",
+      "date": "Date",
+      "routeStop": "Route Stop",
+      "employee": "Employee"
+    }
+  }
+}

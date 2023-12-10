@@ -1,0 +1,48 @@
+{
+  "applications": "*",
+  "changelogDate": "20231207120832",
+  "entityTableName": "employee",
+  "fields": [
+    {
+      "fieldName": "nr",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "from",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "Employee",
+  "relationships": [
+    {
+      "otherEntityName": "inspection",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "inspection",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "repair",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "repair",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "route",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "route",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

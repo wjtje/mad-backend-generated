@@ -1,0 +1,69 @@
+{
+  "applications": "*",
+  "changelogDate": "20231207120932",
+  "entityTableName": "inspection",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "odometer",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "result",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "photo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "completed",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "name": "Inspection",
+  "relationships": [
+    {
+      "otherEntityName": "inspectionPhoto",
+      "otherEntityRelationshipName": "inspection",
+      "relationshipName": "photo",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "repair",
+      "otherEntityRelationshipName": "inspection",
+      "relationshipName": "repair",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "licensePlate",
+      "otherEntityName": "car",
+      "otherEntityRelationshipName": "inspection",
+      "relationshipName": "car",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "lastName",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "inspection",
+      "relationshipName": "employee",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "rental",
+      "otherEntityRelationshipName": "inspection",
+      "relationshipName": "rental",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

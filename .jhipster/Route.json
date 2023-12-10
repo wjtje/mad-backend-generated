@@ -1,0 +1,38 @@
+{
+  "applications": "*",
+  "changelogDate": "20231207121332",
+  "entityTableName": "route",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "Route",
+  "relationships": [
+    {
+      "otherEntityName": "routeStop",
+      "otherEntityRelationshipName": "route",
+      "relationshipName": "routeStop",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "lastName",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "route",
+      "relationshipName": "employee",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}
