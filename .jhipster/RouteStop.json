@@ -1,4 +1,7 @@
 {
+  "annotations": {
+    "changelogDate": "20231207121432"
+  },
   "applications": "*",
   "changelogDate": "20231207121432",
   "entityTableName": "route_stop",

@@ -76,15 +76,15 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "auto-maat:build:development",
+            "buildTarget": "auto-maat:build:development",
             "port": 4200
           },
           "configurations": {
             "production": {
-              "browserTarget": "auto-maat:build:production"
+              "buildTarget": "auto-maat:build:production"
             },
             "development": {
-              "browserTarget": "auto-maat:build:development"
+              "buildTarget": "auto-maat:build:development"
             }
           },
           "defaultConfiguration": "development"

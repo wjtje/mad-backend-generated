@@ -8,10 +8,12 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
 
         <div class="mb-3">
           <label class="form-label" jhiTranslate="autoMaatApp.route.code" for="field_code">Code</label>
@@ -58,9 +60,9 @@
             [compareWith]="compareEmployee"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="employeeOption" *ngFor="let employeeOption of employeesSharedCollection">
-              {{ employeeOption.lastName }}
-            </option>
+            @for (employeeOption of employeesSharedCollection; track $index) {
+              <option [ngValue]="employeeOption">{{ employeeOption.lastName }}</option>
+            }
           </select>
         </div>
       </div>

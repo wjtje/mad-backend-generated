@@ -164,7 +164,7 @@ public class LocationResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the location, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Location> getLocation(@PathVariable Long id) {
+    public ResponseEntity<Location> getLocation(@PathVariable("id") Long id) {
         log.debug("REST request to get Location : {}", id);
         Optional<Location> location = locationRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(location);
@@ -177,7 +177,7 @@ public class LocationResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteLocation(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteLocation(@PathVariable("id") Long id) {
         log.debug("REST request to delete Location : {}", id);
         locationRepository.deleteById(id);
         return ResponseEntity
