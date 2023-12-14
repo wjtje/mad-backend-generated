@@ -4,8 +4,8 @@ import { ILocation } from 'app/entities/location/location.model';
 export interface IRouteStop {
   id: number;
   nr?: number | null;
-  route?: Pick<IRoute, 'id'> | null;
-  location?: Pick<ILocation, 'id'> | null;
+  route?: IRoute | null;
+  location?: ILocation | null;
 }
 
 export type NewRouteStop = Omit<IRouteStop, 'id'> & { id: null };

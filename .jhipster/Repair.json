@@ -1,4 +1,7 @@
 {
+  "annotations": {
+    "changelogDate": "20231207121132"
+  },
   "applications": "*",
   "changelogDate": "20231207121132",
   "entityTableName": "repair",

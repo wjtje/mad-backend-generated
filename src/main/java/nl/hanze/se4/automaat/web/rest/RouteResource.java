@@ -146,7 +146,7 @@ public class RouteResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of routes in body.
      */
     @GetMapping("")
-    public List<Route> getAllRoutes(@RequestParam(required = false, defaultValue = "true") boolean eagerload) {
+    public List<Route> getAllRoutes(@RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload) {
         log.debug("REST request to get all Routes");
         if (eagerload) {
             return routeRepository.findAllWithEagerRelationships();
@@ -162,7 +162,7 @@ public class RouteResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the route, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Route> getRoute(@PathVariable Long id) {
+    public ResponseEntity<Route> getRoute(@PathVariable("id") Long id) {
         log.debug("REST request to get Route : {}", id);
         Optional<Route> route = routeRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(route);
@@ -175,7 +175,7 @@ public class RouteResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRoute(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteRoute(@PathVariable("id") Long id) {
         log.debug("REST request to delete Route : {}", id);
         routeRepository.deleteById(id);
         return ResponseEntity

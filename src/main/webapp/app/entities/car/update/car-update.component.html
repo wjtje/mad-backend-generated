@@ -8,10 +8,12 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
 
         <div class="mb-3">
           <label class="form-label" jhiTranslate="autoMaatApp.car.brand" for="field_brand">Brand</label>
@@ -27,7 +29,9 @@
           <label class="form-label" jhiTranslate="autoMaatApp.car.fuel" for="field_fuel">Fuel</label>
           <select class="form-control" name="fuel" formControlName="fuel" id="field_fuel" data-cy="fuel">
             <option [ngValue]="null">{{ 'autoMaatApp.Fuel.null' | translate }}</option>
-            <option *ngFor="let fuel of fuelValues" [value]="fuel">{{ 'autoMaatApp.Fuel.' + fuel | translate }}</option>
+            @for (fuel of fuelValues; track $index) {
+              <option [value]="fuel">{{ 'autoMaatApp.Fuel.' + fuel | translate }}</option>
+            }
           </select>
         </div>
 
@@ -96,7 +100,9 @@
           <label class="form-label" jhiTranslate="autoMaatApp.car.body" for="field_body">Body</label>
           <select class="form-control" name="body" formControlName="body" id="field_body" data-cy="body">
             <option [ngValue]="null">{{ 'autoMaatApp.Body.null' | translate }}</option>
-            <option *ngFor="let body of bodyValues" [value]="body">{{ 'autoMaatApp.Body.' + body | translate }}</option>
+            @for (body of bodyValues; track $index) {
+              <option [value]="body">{{ 'autoMaatApp.Body.' + body | translate }}</option>
+            }
           </select>
         </div>
       </div>

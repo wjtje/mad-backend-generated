@@ -24,112 +24,129 @@
 
   <jhi-alert></jhi-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="rentals?.length === 0">
-    <span jhiTranslate="autoMaatApp.rental.home.notFound">No Rentals found</span>
-  </div>
+  @if (rentals?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="autoMaatApp.rental.home.notFound">No Rentals found</span>
+    </div>
+  }
 
-  <div class="table-responsive table-entities" id="entities" *ngIf="rentals && rentals.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" jhiSortBy="id">
-            <div class="d-flex">
-              <span jhiTranslate="global.field.id">ID</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="code">
-            <div class="d-flex">
-              <span jhiTranslate="autoMaatApp.rental.code">Code</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="longitude">
-            <div class="d-flex">
-              <span jhiTranslate="autoMaatApp.rental.longitude">Longitude</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="latitude">
-            <div class="d-flex">
-              <span jhiTranslate="autoMaatApp.rental.latitude">Latitude</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="fromDate">
-            <div class="d-flex">
-              <span jhiTranslate="autoMaatApp.rental.fromDate">From Date</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="toDate">
-            <div class="d-flex">
-              <span jhiTranslate="autoMaatApp.rental.toDate">To Date</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="state">
-            <div class="d-flex">
-              <span jhiTranslate="autoMaatApp.rental.state">State</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="customer.lastName">
-            <div class="d-flex">
-              <span jhiTranslate="autoMaatApp.rental.customer">Customer</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" jhiSortBy="car.licensePlate">
-            <div class="d-flex">
-              <span jhiTranslate="autoMaatApp.rental.car">Car</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let rental of rentals; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/rental', rental.id, 'view']">{{ rental.id }}</a>
-          </td>
-          <td>{{ rental.code }}</td>
-          <td>{{ rental.longitude }}</td>
-          <td>{{ rental.latitude }}</td>
-          <td>{{ rental.fromDate | formatMediumDate }}</td>
-          <td>{{ rental.toDate | formatMediumDate }}</td>
-          <td jhiTranslate="{{ 'autoMaatApp.RentalState.' + rental.state }}">{{ rental.state }}</td>
-          <td>
-            <div *ngIf="rental.customer">
-              <a [routerLink]="['/customer', rental.customer.id, 'view']">{{ rental.customer.lastName }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="rental.car">
-              <a [routerLink]="['/car', rental.car.id, 'view']">{{ rental.car.licensePlate }}</a>
-            </div>
-          </td>
-          <td class="text-end">
-            <div class="btn-group">
-              <a [routerLink]="['/rental', rental.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </a>
+  @if (rentals && rentals.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
 
-              <a [routerLink]="['/rental', rental.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </a>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="code">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.rental.code">Code</span>
 
-              <button type="submit" (click)="delete(rental)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="longitude">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.rental.longitude">Longitude</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="latitude">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.rental.latitude">Latitude</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fromDate">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.rental.fromDate">From Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="toDate">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.rental.toDate">To Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="state">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.rental.state">State</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="customer.lastName">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.rental.customer">Customer</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="car.licensePlate">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.rental.car">Car</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (rental of rentals; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/rental', rental.id, 'view']">{{ rental.id }}</a>
+              </td>
+              <td>{{ rental.code }}</td>
+              <td>{{ rental.longitude }}</td>
+              <td>{{ rental.latitude }}</td>
+              <td>{{ rental.fromDate | formatMediumDate }}</td>
+              <td>{{ rental.toDate | formatMediumDate }}</td>
+              <td jhiTranslate="{{ 'autoMaatApp.RentalState.' + rental.state }}">{{ rental.state }}</td>
+              <td>
+                @if (rental.customer) {
+                  <div>
+                    <a [routerLink]="['/customer', rental.customer.id, 'view']">{{ rental.customer.lastName }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (rental.car) {
+                  <div>
+                    <a [routerLink]="['/car', rental.car.id, 'view']">{{ rental.car.licensePlate }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/rental', rental.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/rental', rental.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(rental)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
 </div>

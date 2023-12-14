@@ -4,7 +4,7 @@ export interface IInspectionPhoto {
   id: number;
   photo?: string | null;
   photoContentType?: string | null;
-  inspection?: Pick<IInspection, 'id'> | null;
+  inspection?: IInspection | null;
 }
 
 export type NewInspectionPhoto = Omit<IInspectionPhoto, 'id'> & { id: null };

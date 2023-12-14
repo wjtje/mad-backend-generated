@@ -13,7 +13,7 @@
     "devServerPort": 4200,
     "enableHibernateCache": false,
     "entities": ["Car", "Rental", "Customer", "Employee", "Inspection", "InspectionPhoto", "Repair", "Location", "Route", "RouteStop"],
-    "jhipsterVersion": "8.0.0",
+    "jhipsterVersion": "8.1.0",
     "jwtSecretKey": "YzY0M2YzZGY5MzQzN2U2M2I1YjZiMThjNGFmYTQ3MTIyNWY4MWVlYjVhMjEwNWI5NDFmZTU5NmVlMWY5NWY3MTA2YjFiZTM0MDk2MzYxZTAxYmVlNDc4M2UyNTUzNzA5YjE3MmMwYTFjYzAxYzRkZDE2NDRjMjgxMzRhZmJiNDc=",
     "languages": ["en", "nl"],
     "lastLiquibaseTimestamp": 1701951272000,
