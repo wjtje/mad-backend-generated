@@ -181,7 +181,7 @@ public class CarResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the car, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Car> getCar(@PathVariable Long id) {
+    public ResponseEntity<Car> getCar(@PathVariable("id") Long id) {
         log.debug("REST request to get Car : {}", id);
         Optional<Car> car = carRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(car);
@@ -194,7 +194,7 @@ public class CarResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCar(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCar(@PathVariable("id") Long id) {
         log.debug("REST request to delete Car : {}", id);
         carRepository.deleteById(id);
         return ResponseEntity

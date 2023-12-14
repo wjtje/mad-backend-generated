@@ -157,7 +157,7 @@ public class RentalResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of rentals in body.
      */
     @GetMapping("")
-    public List<Rental> getAllRentals(@RequestParam(required = false, defaultValue = "true") boolean eagerload) {
+    public List<Rental> getAllRentals(@RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload) {
         log.debug("REST request to get all Rentals");
         if (eagerload) {
             return rentalRepository.findAllWithEagerRelationships();
@@ -173,7 +173,7 @@ public class RentalResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the rental, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Rental> getRental(@PathVariable Long id) {
+    public ResponseEntity<Rental> getRental(@PathVariable("id") Long id) {
         log.debug("REST request to get Rental : {}", id);
         Optional<Rental> rental = rentalRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(rental);
@@ -186,7 +186,7 @@ public class RentalResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRental(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteRental(@PathVariable("id") Long id) {
         log.debug("REST request to delete Rental : {}", id);
         rentalRepository.deleteById(id);
         return ResponseEntity

@@ -8,10 +8,12 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
 
         <div class="mb-3">
           <label class="form-label" jhiTranslate="autoMaatApp.routeStop.nr" for="field_nr">Nr</label>
@@ -22,7 +24,9 @@
           <label class="form-label" jhiTranslate="autoMaatApp.routeStop.route" for="field_route">Route</label>
           <select class="form-control" id="field_route" data-cy="route" name="route" formControlName="route" [compareWith]="compareRoute">
             <option [ngValue]="null"></option>
-            <option [ngValue]="routeOption" *ngFor="let routeOption of routesSharedCollection">{{ routeOption.id }}</option>
+            @for (routeOption of routesSharedCollection; track $index) {
+              <option [ngValue]="routeOption">{{ routeOption.id }}</option>
+            }
           </select>
         </div>
 
@@ -37,7 +41,9 @@
             [compareWith]="compareLocation"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="locationOption" *ngFor="let locationOption of locationsSharedCollection">{{ locationOption.id }}</option>
+            @for (locationOption of locationsSharedCollection; track $index) {
+              <option [ngValue]="locationOption">{{ locationOption.id }}</option>
+            }
           </select>
         </div>
       </div>

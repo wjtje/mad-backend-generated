@@ -155,7 +155,7 @@ public class RouteStopResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the routeStop, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<RouteStop> getRouteStop(@PathVariable Long id) {
+    public ResponseEntity<RouteStop> getRouteStop(@PathVariable("id") Long id) {
         log.debug("REST request to get RouteStop : {}", id);
         Optional<RouteStop> routeStop = routeStopRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(routeStop);
@@ -168,7 +168,7 @@ public class RouteStopResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRouteStop(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteRouteStop(@PathVariable("id") Long id) {
         log.debug("REST request to delete RouteStop : {}", id);
         routeStopRepository.deleteById(id);
         return ResponseEntity

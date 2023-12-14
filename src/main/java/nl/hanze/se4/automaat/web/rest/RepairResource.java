@@ -148,7 +148,7 @@ public class RepairResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of repairs in body.
      */
     @GetMapping("")
-    public List<Repair> getAllRepairs(@RequestParam(required = false, defaultValue = "true") boolean eagerload) {
+    public List<Repair> getAllRepairs(@RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload) {
         log.debug("REST request to get all Repairs");
         if (eagerload) {
             return repairRepository.findAllWithEagerRelationships();
@@ -164,7 +164,7 @@ public class RepairResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the repair, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Repair> getRepair(@PathVariable Long id) {
+    public ResponseEntity<Repair> getRepair(@PathVariable("id") Long id) {
         log.debug("REST request to get Repair : {}", id);
         Optional<Repair> repair = repairRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(repair);
@@ -177,7 +177,7 @@ public class RepairResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRepair(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteRepair(@PathVariable("id") Long id) {
         log.debug("REST request to delete Repair : {}", id);
         repairRepository.deleteById(id);
         return ResponseEntity

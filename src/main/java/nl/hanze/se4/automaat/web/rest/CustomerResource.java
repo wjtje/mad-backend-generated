@@ -164,7 +164,7 @@ public class CustomerResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the customer, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> getCustomer(@PathVariable Long id) {
+    public ResponseEntity<Customer> getCustomer(@PathVariable("id") Long id) {
         log.debug("REST request to get Customer : {}", id);
         Optional<Customer> customer = customerRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(customer);
@@ -177,7 +177,7 @@ public class CustomerResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCustomer(@PathVariable("id") Long id) {
         log.debug("REST request to delete Customer : {}", id);
         customerRepository.deleteById(id);
         return ResponseEntity

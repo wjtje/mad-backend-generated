@@ -158,7 +158,7 @@ public class InspectionPhotoResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the inspectionPhoto, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<InspectionPhoto> getInspectionPhoto(@PathVariable Long id) {
+    public ResponseEntity<InspectionPhoto> getInspectionPhoto(@PathVariable("id") Long id) {
         log.debug("REST request to get InspectionPhoto : {}", id);
         Optional<InspectionPhoto> inspectionPhoto = inspectionPhotoRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(inspectionPhoto);
@@ -171,7 +171,7 @@ public class InspectionPhotoResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteInspectionPhoto(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteInspectionPhoto(@PathVariable("id") Long id) {
         log.debug("REST request to delete InspectionPhoto : {}", id);
         inspectionPhotoRepository.deleteById(id);
         return ResponseEntity

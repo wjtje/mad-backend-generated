@@ -13,6 +13,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -32,7 +33,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 /**
  * Integration tests for the {@link InspectionResource} REST controller.
@@ -174,7 +174,7 @@ class InspectionResourceIT {
             .andExpect(jsonPath("$.[*].odometer").value(hasItem(DEFAULT_ODOMETER.intValue())))
             .andExpect(jsonPath("$.[*].result").value(hasItem(DEFAULT_RESULT)))
             .andExpect(jsonPath("$.[*].photoContentType").value(hasItem(DEFAULT_PHOTO_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))))
+            .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_PHOTO))))
             .andExpect(jsonPath("$.[*].completed").value(hasItem(sameInstant(DEFAULT_COMPLETED))));
     }
 
@@ -211,7 +211,7 @@ class InspectionResourceIT {
             .andExpect(jsonPath("$.odometer").value(DEFAULT_ODOMETER.intValue()))
             .andExpect(jsonPath("$.result").value(DEFAULT_RESULT))
             .andExpect(jsonPath("$.photoContentType").value(DEFAULT_PHOTO_CONTENT_TYPE))
-            .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)))
+            .andExpect(jsonPath("$.photo").value(Base64.getEncoder().encodeToString(DEFAULT_PHOTO)))
             .andExpect(jsonPath("$.completed").value(sameInstant(DEFAULT_COMPLETED)));
     }
 

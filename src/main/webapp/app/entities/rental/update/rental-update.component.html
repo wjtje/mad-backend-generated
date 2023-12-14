@@ -8,10 +8,12 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
 
         <div class="mb-3">
           <label class="form-label" jhiTranslate="autoMaatApp.rental.code" for="field_code">Code</label>
@@ -66,9 +68,9 @@
           <label class="form-label" jhiTranslate="autoMaatApp.rental.state" for="field_state">State</label>
           <select class="form-control" name="state" formControlName="state" id="field_state" data-cy="state">
             <option [ngValue]="null">{{ 'autoMaatApp.RentalState.null' | translate }}</option>
-            <option *ngFor="let rentalState of rentalStateValues" [value]="rentalState">
-              {{ 'autoMaatApp.RentalState.' + rentalState | translate }}
-            </option>
+            @for (rentalState of rentalStateValues; track $index) {
+              <option [value]="rentalState">{{ 'autoMaatApp.RentalState.' + rentalState | translate }}</option>
+            }
           </select>
         </div>
 
@@ -83,9 +85,9 @@
             [compareWith]="compareCustomer"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="customerOption" *ngFor="let customerOption of customersSharedCollection">
-              {{ customerOption.lastName }}
-            </option>
+            @for (customerOption of customersSharedCollection; track $index) {
+              <option [ngValue]="customerOption">{{ customerOption.lastName }}</option>
+            }
           </select>
         </div>
 
@@ -93,7 +95,9 @@
           <label class="form-label" jhiTranslate="autoMaatApp.rental.car" for="field_car">Car</label>
           <select class="form-control" id="field_car" data-cy="car" name="car" formControlName="car" [compareWith]="compareCar">
             <option [ngValue]="null"></option>
-            <option [ngValue]="carOption" *ngFor="let carOption of carsSharedCollection">{{ carOption.licensePlate }}</option>
+            @for (carOption of carsSharedCollection; track $index) {
+              <option [ngValue]="carOption">{{ carOption.licensePlate }}</option>
+            }
           </select>
         </div>
       </div>
