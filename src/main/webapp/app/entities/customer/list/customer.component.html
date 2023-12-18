@@ -70,7 +70,7 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="systemUser.id">
+            <th scope="col" jhiSortBy="systemUser.login">
               <div class="d-flex">
                 <span jhiTranslate="autoMaatApp.customer.systemUser">System User</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -96,7 +96,7 @@
               <td>{{ customer.firstName }}</td>
               <td>{{ customer.from | formatMediumDate }}</td>
               <td>
-                {{ customer.systemUser?.id }}
+                {{ customer.systemUser?.login }}
               </td>
               <td>
                 @if (customer.location) {

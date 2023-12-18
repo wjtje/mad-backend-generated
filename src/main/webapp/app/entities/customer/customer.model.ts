@@ -9,7 +9,7 @@ export interface ICustomer {
   lastName?: string | null;
   firstName?: string | null;
   from?: dayjs.Dayjs | null;
-  systemUser?: Pick<IUser, 'id'> | null;
+  systemUser?: Pick<IUser, 'id' | 'login'> | null;
   rentals?: IRental[] | null;
   location?: ILocation | null;
 }

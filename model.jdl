@@ -120,5 +120,5 @@ relationship OneToMany {
 }
 
 relationship OneToOne {
-    Customer{systemUser} to User with builtInEntity
+    Customer{systemUser(login)} to User with builtInEntity
 }

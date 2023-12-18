@@ -59,7 +59,7 @@
           >
             <option [ngValue]="null"></option>
             @for (userOption of usersSharedCollection; track $index) {
-              <option [ngValue]="userOption">{{ userOption.id }}</option>
+              <option [ngValue]="userOption">{{ userOption.login }}</option>
             }
           </select>
         </div>

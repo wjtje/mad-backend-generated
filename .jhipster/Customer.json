@@ -26,6 +26,7 @@
   "name": "Customer",
   "relationships": [
     {
+      "otherEntityField": "login",
       "otherEntityName": "user",
       "relationshipName": "systemUser",
       "relationshipSide": "left",
