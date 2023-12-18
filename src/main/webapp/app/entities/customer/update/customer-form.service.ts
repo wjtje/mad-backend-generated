@@ -22,6 +22,7 @@ type CustomerFormGroupContent = {
   lastName: FormControl<ICustomer['lastName']>;
   firstName: FormControl<ICustomer['firstName']>;
   from: FormControl<ICustomer['from']>;
+  systemUser: FormControl<ICustomer['systemUser']>;
   location: FormControl<ICustomer['location']>;
 };
 
@@ -46,6 +47,7 @@ export class CustomerFormService {
       lastName: new FormControl(customerRawValue.lastName),
       firstName: new FormControl(customerRawValue.firstName),
       from: new FormControl(customerRawValue.from),
+      systemUser: new FormControl(customerRawValue.systemUser),
       location: new FormControl(customerRawValue.location),
     });
   }

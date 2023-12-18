@@ -6,10 +6,12 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of, Subject, from } from 'rxjs';
 
+import { IUser } from 'app/entities/user/user.model';
+import { UserService } from 'app/entities/user/user.service';
 import { ILocation } from 'app/entities/location/location.model';
 import { LocationService } from 'app/entities/location/service/location.service';
-import { CustomerService } from '../service/customer.service';
 import { ICustomer } from '../customer.model';
+import { CustomerService } from '../service/customer.service';
 import { CustomerFormService } from './customer-form.service';
 
 import { CustomerUpdateComponent } from './customer-update.component';
@@ -20,6 +22,7 @@ describe('Customer Management Update Component', () => {
   let activatedRoute: ActivatedRoute;
   let customerFormService: CustomerFormService;
   let customerService: CustomerService;
+  let userService: UserService;
   let locationService: LocationService;
 
   beforeEach(() => {
@@ -42,12 +45,35 @@ describe('Customer Management Update Component', () => {
     activatedRoute = TestBed.inject(ActivatedRoute);
     customerFormService = TestBed.inject(CustomerFormService);
     customerService = TestBed.inject(CustomerService);
+    userService = TestBed.inject(UserService);
     locationService = TestBed.inject(LocationService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
+    it('Should call User query and add missing value', () => {
+      const customer: ICustomer = { id: 456 };
+      const systemUser: IUser = { id: 24376 };
+      customer.systemUser = systemUser;
+
+      const userCollection: IUser[] = [{ id: 28417 }];
+      jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
+      const additionalUsers = [systemUser];
+      const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
+      jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ customer });
+      comp.ngOnInit();
+
+      expect(userService.query).toHaveBeenCalled();
+      expect(userService.addUserToCollectionIfMissing).toHaveBeenCalledWith(
+        userCollection,
+        ...additionalUsers.map(expect.objectContaining),
+      );
+      expect(comp.usersSharedCollection).toEqual(expectedCollection);
+    });
+
     it('Should call Location query and add missing value', () => {
       const customer: ICustomer = { id: 456 };
       const location: ILocation = { id: 4116 };
@@ -72,12 +98,15 @@ describe('Customer Management Update Component', () => {
 
     it('Should update editForm', () => {
       const customer: ICustomer = { id: 456 };
+      const systemUser: IUser = { id: 29042 };
+      customer.systemUser = systemUser;
       const location: ILocation = { id: 9864 };
       customer.location = location;
 
       activatedRoute.data = of({ customer });
       comp.ngOnInit();
 
+      expect(comp.usersSharedCollection).toContain(systemUser);
       expect(comp.locationsSharedCollection).toContain(location);
       expect(comp.customer).toEqual(customer);
     });
@@ -152,6 +181,16 @@ describe('Customer Management Update Component', () => {
   });
 
   describe('Compare relationships', () => {
+    describe('compareUser', () => {
+      it('Should forward to userService', () => {
+        const entity = { id: 123 };
+        const entity2 = { id: 456 };
+        jest.spyOn(userService, 'compareUser');
+        comp.compareUser(entity, entity2);
+        expect(userService.compareUser).toHaveBeenCalledWith(entity, entity2);
+      });
+    });
+
     describe('compareLocation', () => {
       it('Should forward to locationService', () => {
         const entity = { id: 123 };

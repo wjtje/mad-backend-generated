@@ -24,6 +24,7 @@ describe('Customer Form Service', () => {
             lastName: expect.any(Object),
             firstName: expect.any(Object),
             from: expect.any(Object),
+            systemUser: expect.any(Object),
             location: expect.any(Object),
           }),
         );
@@ -39,6 +40,7 @@ describe('Customer Form Service', () => {
             lastName: expect.any(Object),
             firstName: expect.any(Object),
             from: expect.any(Object),
+            systemUser: expect.any(Object),
             location: expect.any(Object),
           }),
         );

@@ -26,6 +26,13 @@
   "name": "Customer",
   "relationships": [
     {
+      "otherEntityName": "user",
+      "relationshipName": "systemUser",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipWithBuiltInEntity": true
+    },
+    {
       "otherEntityName": "rental",
       "otherEntityRelationshipName": "customer",
       "relationshipName": "rental",

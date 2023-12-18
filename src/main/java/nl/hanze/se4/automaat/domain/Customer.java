@@ -34,6 +34,10 @@ public class Customer implements Serializable {
     @Column(name = "jhi_from")
     private LocalDate from;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(unique = true)
+    private User systemUser;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     @JsonIgnoreProperties(value = { "inspections", "customer", "car" }, allowSetters = true)
     private Set<Rental> rentals = new HashSet<>();
@@ -107,6 +111,19 @@ public class Customer implements Serializable {
 
     public void setFrom(LocalDate from) {
         this.from = from;
+    }
+
+    public User getSystemUser() {
+        return this.systemUser;
+    }
+
+    public void setSystemUser(User user) {
+        this.systemUser = user;
+    }
+
+    public Customer systemUser(User user) {
+        this.setSystemUser(user);
+        return this;
     }
 
     public Set<Rental> getRentals() {

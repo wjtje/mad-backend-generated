@@ -1,31 +1,11 @@
 id;brand;model;fuel;options;license_plate;engine_size;model_year;since;price;nr_of_seats;body
-1;Toyota;Camry;GASOLINE;Sunroof;ABC123;2.5;2022;2022-11-02;100;5;SEDAN
-2;Honda;CR-V;DIESEL;Leather Seats;DEF456;1.6;2021;2021-11-02;100;5;SUV
-3;Ford;F-150;GASOLINE;4x4;GHI789;5.0;2020;2020-11-02;100;5;TRUCK
-4;Chevrolet;Impala;GASOLINE;Bluetooth;JKL012;3.6;2019;2019-11-02;100;5;SEDAN
-5;BMW;3 Series;GASOLINE;Navigation;MNO345;2.0;2023;2023-11-02;100;5;SEDAN
-6;Mercedes-Benz;E-Class;DIESEL;Premium Sound;PQR678;3.0;2022;2022-11-02;100;5;SEDAN
-7;Toyota;RAV4 Hybrid;HYBRID;Backup Camera;STU901;2.5;2021;2021-11-02;100;5;SUV
-8;Audi;Q5;GASOLINE;Heated Seats;VWX234;2.0;2020;2020-11-02;100;5;SUV
-9;Jeep;Wrangler;GASOLINE;Convertible;YZA567;3.6;2019;2019-11-02;100;5;SUV
-10;Nissan;Altima;GASOLINE;Keyless Entry;BCD890;2.5;2023;2023-11-02;100;5;SEDAN
-11;Subaru;Outback;GASOLINE;AWD;DEF123;2.5;2022;2022-11-02;100;5;STATIONWAGON
-12;Hyundai;Santa Fe;GASOLINE;Apple CarPlay;GHI456;2.5;2021;2021-11-02;100;5;SUV
-13;Chevrolet;Traverse;HYBRID;Third Row Seating;JKL789;3.6;2020;2020-11-02;100;5;SUV
-14;Ford;Escape;GASOLINE;Blind Spot Monitoring;MNO012;2.5;2019;2019-11-02;100;5;SUV
-15;Honda;Civic;GASOLINE;Bluetooth;PQR345;1.8;2023;2023-11-02;100;5;SEDAN
-16;Toyota;Highlander;DIESEL;Leather Interior;STU678;2.5;2022;2022-11-02;100;5;SUV
-17;BMW;5 Series;GASOLINE;Heads-Up Display;VWX901;2.0;2021;2021-11-02;100;5;SEDAN
-18;Mercedes-Benz;GLC-Class;GASOLINE;Power Liftgate;YZA234;2.0;2020;2020-11-02;100;5;SUV
-19;Audi;A4;HYBRID;Virtual Cockpit;BCD567;2.0;2019;2019-11-02;100;5;SEDAN
-20;Nissan;Murano;GASOLINE;Panoramic Roof;DEF890;3.5;2023;2023-11-02;100;5;SUV
-21;Subaru;Forester;GASOLINE;All-Weather Package;GHI123;2.5;2022;2022-11-02;100;5;SUV
-22;Jeep;Cherokee;GASOLINE;Lane Departure Warning;JKL456;2.4;2021;2021-11-02;100;5;SUV
-23;Hyundai;Kona Electric;ELECTRIC;Wireless Charging;MNO789;64 kWh;2020;2020-11-02;100;5;SUV
-24;Chevrolet;Malibu;GASOLINE;Remote Start;PQR012;1.5;2019;2019-11-02;100;5;SEDAN
-25;Ford;Explorer;DIESEL;7-Passenger Seating;STU345;3.0;2023;2023-11-02;100;5;SUV
-26;Honda;Fit;GASOLINE;Keyless Ignition;VWX678;1.5;2022;2022-11-02;100;5;HATCHBACK
-27;Toyota;4Runner;GASOLINE;Off-Road Package;YZA901;4.0;2021;2021-11-02;100;5;SUV
-28;BMW;7 Series;HYBRID;Massage Seats;BCD234;3.0;2020;2020-11-02;100;5;SEDAN
-29;Mercedes-Benz;A-Class;GASOLINE;Wireless CarPlay;DEF567;2.0;2019;2019-11-02;100;5;SEDAN
-30;Audi;Q3;GASOLINE;Adaptive Cruise Control;GHI890;2.0;2023;2023-11-02;100;5;SUV
+1;whether;amid;GASOLINE;ray;zowie pupa retention;11622;16080;2023-12-07;3074.41;17061;MINIVAN
+2;blah while;hmph ah;GASOLINE;lest;while;10652;17150;2023-12-07;28902.85;17152;MINIVAN
+3;whoever;when;DIESEL;comptroller spell near;from;21993;858;2023-12-07;1482.88;29621;COUPE
+4;grateful;reassure onto;GASOLINE;unnaturally boo barring;solemnly yowza heavy;5943;6125;2023-12-06;18048.88;30383;STATIONWAGON
+5;which till;unto deconsecrate override;ELECTRIC;joyously yawningly;humble ha failing;22631;26537;2023-12-06;18816.25;12250;STATIONWAGON
+6;gullible;autosave ugh airbag;ELECTRIC;drive somewhere;slot yuck blah;23768;24265;2023-12-07;8319.84;15275;SEDAN
+7;deeply;scary fatally atop;DIESEL;but;scrambled distant inter;2766;3220;2023-12-06;16804.41;14821;SEDAN
+8;damp once;joyfully;ELECTRIC;maternity loyally;scald;20708;17163;2023-12-07;26311.39;30220;HATCHBACK
+9;slow;seemingly rectangular;ELECTRIC;on appear;drat regarding hare;24212;30807;2023-12-06;17611.08;15286;MPV
+10;phooey framework opposite;right zowie blink;GASOLINE;fairly obnoxiously below;continually;10780;3598;2023-12-07;21730.21;19652;MPV

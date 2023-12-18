@@ -7,10 +7,12 @@ import { finalize, map } from 'rxjs/operators';
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { IUser } from 'app/entities/user/user.model';
+import { UserService } from 'app/entities/user/user.service';
 import { ILocation } from 'app/entities/location/location.model';
 import { LocationService } from 'app/entities/location/service/location.service';
-import { ICustomer } from '../customer.model';
 import { CustomerService } from '../service/customer.service';
+import { ICustomer } from '../customer.model';
 import { CustomerFormService, CustomerFormGroup } from './customer-form.service';
 
 @Component({
@@ -23,6 +25,7 @@ export class CustomerUpdateComponent implements OnInit {
   isSaving = false;
   customer: ICustomer | null = null;
 
+  usersSharedCollection: IUser[] = [];
   locationsSharedCollection: ILocation[] = [];
 
   editForm: CustomerFormGroup = this.customerFormService.createCustomerFormGroup();
@@ -30,9 +33,12 @@ export class CustomerUpdateComponent implements OnInit {
   constructor(
     protected customerService: CustomerService,
     protected customerFormService: CustomerFormService,
+    protected userService: UserService,
     protected locationService: LocationService,
     protected activatedRoute: ActivatedRoute,
   ) {}
+
+  compareUser = (o1: IUser | null, o2: IUser | null): boolean => this.userService.compareUser(o1, o2);
 
   compareLocation = (o1: ILocation | null, o2: ILocation | null): boolean => this.locationService.compareLocation(o1, o2);
 
@@ -84,6 +90,7 @@ export class CustomerUpdateComponent implements OnInit {
     this.customer = customer;
     this.customerFormService.resetForm(this.editForm, customer);
 
+    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing<IUser>(this.usersSharedCollection, customer.systemUser);
     this.locationsSharedCollection = this.locationService.addLocationToCollectionIfMissing<ILocation>(
       this.locationsSharedCollection,
       customer.location,
@@ -91,6 +98,12 @@ export class CustomerUpdateComponent implements OnInit {
   }
 
   protected loadRelationshipsOptions(): void {
+    this.userService
+      .query()
+      .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
+      .pipe(map((users: IUser[]) => this.userService.addUserToCollectionIfMissing<IUser>(users, this.customer?.systemUser)))
+      .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
+
     this.locationService
       .query()
       .pipe(map((res: HttpResponse<ILocation[]>) => res.body ?? []))
