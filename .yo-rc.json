@@ -8,6 +8,7 @@
     "cacheProvider": "no",
     "clientFramework": "angular",
     "clientPackageManager": "npm",
+    "creationTimestamp": 1702577471821,
     "databaseType": "sql",
     "devDatabaseType": "h2Memory",
     "devServerPort": 4200,
