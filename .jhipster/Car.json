@@ -51,6 +51,14 @@
       "fieldName": "body",
       "fieldType": "Body",
       "fieldValues": "STATIONWAGON,SEDAN,HATCHBACK,MINIVAN,MPV,SUV,COUPE,TRUCK,CONVERTIBLE"
+    },
+    {
+      "fieldName": "longitude",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "latitude",
+      "fieldType": "Float"
     }
   ],
   "name": "Car",

@@ -58,10 +58,10 @@ describe('Repair Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call Car query and add missing value', () => {
       const repair: IRepair = { id: 456 };
-      const car: ICar = { id: 5375 };
+      const car: ICar = { id: 7661 };
       repair.car = car;
 
-      const carCollection: ICar[] = [{ id: 12428 }];
+      const carCollection: ICar[] = [{ id: 995 }];
       jest.spyOn(carService, 'query').mockReturnValue(of(new HttpResponse({ body: carCollection })));
       const additionalCars = [car];
       const expectedCollection: ICar[] = [...additionalCars, ...carCollection];
@@ -121,7 +121,7 @@ describe('Repair Management Update Component', () => {
 
     it('Should update editForm', () => {
       const repair: IRepair = { id: 456 };
-      const car: ICar = { id: 15663 };
+      const car: ICar = { id: 21900 };
       repair.car = car;
       const employee: IEmployee = { id: 336 };
       repair.employee = employee;

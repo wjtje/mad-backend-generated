@@ -31,6 +31,8 @@ describe('Car Form Service', () => {
             price: expect.any(Object),
             nrOfSeats: expect.any(Object),
             body: expect.any(Object),
+            longitude: expect.any(Object),
+            latitude: expect.any(Object),
           }),
         );
       });
@@ -52,6 +54,8 @@ describe('Car Form Service', () => {
             price: expect.any(Object),
             nrOfSeats: expect.any(Object),
             body: expect.any(Object),
+            longitude: expect.any(Object),
+            latitude: expect.any(Object),
           }),
         );
       });

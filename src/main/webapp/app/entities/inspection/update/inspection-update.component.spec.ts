@@ -58,10 +58,10 @@ describe('Inspection Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call Car query and add missing value', () => {
       const inspection: IInspection = { id: 456 };
-      const car: ICar = { id: 2836 };
+      const car: ICar = { id: 13689 };
       inspection.car = car;
 
-      const carCollection: ICar[] = [{ id: 7220 }];
+      const carCollection: ICar[] = [{ id: 13484 }];
       jest.spyOn(carService, 'query').mockReturnValue(of(new HttpResponse({ body: carCollection })));
       const additionalCars = [car];
       const expectedCollection: ICar[] = [...additionalCars, ...carCollection];
@@ -121,7 +121,7 @@ describe('Inspection Management Update Component', () => {
 
     it('Should update editForm', () => {
       const inspection: IInspection = { id: 456 };
-      const car: ICar = { id: 15214 };
+      const car: ICar = { id: 3298 };
       inspection.car = car;
       const employee: IEmployee = { id: 26232 };
       inspection.employee = employee;

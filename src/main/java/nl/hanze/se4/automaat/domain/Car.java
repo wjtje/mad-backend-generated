@@ -59,6 +59,12 @@ public class Car implements Serializable {
     @Column(name = "body")
     private Body body;
 
+    @Column(name = "longitude")
+    private Float longitude;
+
+    @Column(name = "latitude")
+    private Float latitude;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "car")
     @JsonIgnoreProperties(value = { "photos", "repairs", "car", "employee", "rental" }, allowSetters = true)
     private Set<Inspection> inspections = new HashSet<>();
@@ -229,6 +235,32 @@ public class Car implements Serializable {
         this.body = body;
     }
 
+    public Float getLongitude() {
+        return this.longitude;
+    }
+
+    public Car longitude(Float longitude) {
+        this.setLongitude(longitude);
+        return this;
+    }
+
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
+    }
+
+    public Float getLatitude() {
+        return this.latitude;
+    }
+
+    public Car latitude(Float latitude) {
+        this.setLatitude(latitude);
+        return this;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
+    }
+
     public Set<Inspection> getInspections() {
         return this.inspections;
     }
@@ -357,6 +389,8 @@ public class Car implements Serializable {
             ", price=" + getPrice() +
             ", nrOfSeats=" + getNrOfSeats() +
             ", body='" + getBody() + "'" +
+            ", longitude=" + getLongitude() +
+            ", latitude=" + getLatitude() +
             "}";
     }
 }

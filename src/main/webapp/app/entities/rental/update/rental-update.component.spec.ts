@@ -76,10 +76,10 @@ describe('Rental Management Update Component', () => {
 
     it('Should call Car query and add missing value', () => {
       const rental: IRental = { id: 456 };
-      const car: ICar = { id: 22905 };
+      const car: ICar = { id: 20713 };
       rental.car = car;
 
-      const carCollection: ICar[] = [{ id: 18937 }];
+      const carCollection: ICar[] = [{ id: 19515 }];
       jest.spyOn(carService, 'query').mockReturnValue(of(new HttpResponse({ body: carCollection })));
       const additionalCars = [car];
       const expectedCollection: ICar[] = [...additionalCars, ...carCollection];
@@ -97,7 +97,7 @@ describe('Rental Management Update Component', () => {
       const rental: IRental = { id: 456 };
       const customer: ICustomer = { id: 2984 };
       rental.customer = customer;
-      const car: ICar = { id: 32162 };
+      const car: ICar = { id: 19641 };
       rental.car = car;
 
       activatedRoute.data = of({ rental });

@@ -47,6 +47,12 @@
             <column name="body" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="longitude" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="latitude" type="${floatType}">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>
@@ -79,6 +85,8 @@
             <column name="price" type="numeric"/>
             <column name="nr_of_seats" type="numeric"/>
             <column name="body" type="string"/>
+            <column name="longitude" type="numeric"/>
+            <column name="latitude" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

@@ -152,6 +152,12 @@ public class CarResource {
                 if (car.getBody() != null) {
                     existingCar.setBody(car.getBody());
                 }
+                if (car.getLongitude() != null) {
+                    existingCar.setLongitude(car.getLongitude());
+                }
+                if (car.getLatitude() != null) {
+                    existingCar.setLatitude(car.getLatitude());
+                }
 
                 return existingCar;
             })

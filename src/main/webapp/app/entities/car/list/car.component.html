@@ -119,6 +119,20 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" jhiSortBy="longitude">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.car.longitude">Longitude</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="latitude">
+              <div class="d-flex">
+                <span jhiTranslate="autoMaatApp.car.latitude">Latitude</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -139,6 +153,8 @@
               <td>{{ car.price }}</td>
               <td>{{ car.nrOfSeats }}</td>
               <td jhiTranslate="{{ 'autoMaatApp.Body.' + car.body }}">{{ car.body }}</td>
+              <td>{{ car.longitude }}</td>
+              <td>{{ car.latitude }}</td>
               <td class="text-end">
                 <div class="btn-group">
                   <a [routerLink]="['/car', car.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

@@ -59,6 +59,14 @@
           <dd>
             <span jhiTranslate="{{ 'autoMaatApp.Body.' + car.body }}">{{ car.body }}</span>
           </dd>
+          <dt><span jhiTranslate="autoMaatApp.car.longitude">Longitude</span></dt>
+          <dd>
+            <span>{{ car.longitude }}</span>
+          </dd>
+          <dt><span jhiTranslate="autoMaatApp.car.latitude">Latitude</span></dt>
+          <dd>
+            <span>{{ car.latitude }}</span>
+          </dd>
         </dl>
 
         <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

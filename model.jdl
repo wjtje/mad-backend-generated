@@ -9,7 +9,9 @@ entity Car {
     since LocalDate,
     price Float,
     nrOfSeats Integer,
-    body Body
+    body Body,
+    longitude Float,
+    latitude Float
 }
 
 entity Rental {

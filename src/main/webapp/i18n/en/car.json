@@ -29,6 +29,8 @@
       "price": "Price",
       "nrOfSeats": "Nr Of Seats",
       "body": "Body",
+      "longitude": "Longitude",
+      "latitude": "Latitude",
       "inspection": "Inspection",
       "repair": "Repair",
       "rental": "Rental"

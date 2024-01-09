@@ -66,6 +66,12 @@ class CarResourceIT {
     private static final Body DEFAULT_BODY = Body.STATIONWAGON;
     private static final Body UPDATED_BODY = Body.SEDAN;
 
+    private static final Float DEFAULT_LONGITUDE = 1F;
+    private static final Float UPDATED_LONGITUDE = 2F;
+
+    private static final Float DEFAULT_LATITUDE = 1F;
+    private static final Float UPDATED_LATITUDE = 2F;
+
     private static final String ENTITY_API_URL = "/api/cars";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -101,7 +107,9 @@ class CarResourceIT {
             .since(DEFAULT_SINCE)
             .price(DEFAULT_PRICE)
             .nrOfSeats(DEFAULT_NR_OF_SEATS)
-            .body(DEFAULT_BODY);
+            .body(DEFAULT_BODY)
+            .longitude(DEFAULT_LONGITUDE)
+            .latitude(DEFAULT_LATITUDE);
         return car;
     }
 
@@ -123,7 +131,9 @@ class CarResourceIT {
             .since(UPDATED_SINCE)
             .price(UPDATED_PRICE)
             .nrOfSeats(UPDATED_NR_OF_SEATS)
-            .body(UPDATED_BODY);
+            .body(UPDATED_BODY)
+            .longitude(UPDATED_LONGITUDE)
+            .latitude(UPDATED_LATITUDE);
         return car;
     }
 
@@ -156,6 +166,8 @@ class CarResourceIT {
         assertThat(testCar.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testCar.getNrOfSeats()).isEqualTo(DEFAULT_NR_OF_SEATS);
         assertThat(testCar.getBody()).isEqualTo(DEFAULT_BODY);
+        assertThat(testCar.getLongitude()).isEqualTo(DEFAULT_LONGITUDE);
+        assertThat(testCar.getLatitude()).isEqualTo(DEFAULT_LATITUDE);
     }
 
     @Test
@@ -198,7 +210,9 @@ class CarResourceIT {
             .andExpect(jsonPath("$.[*].since").value(hasItem(DEFAULT_SINCE.toString())))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].nrOfSeats").value(hasItem(DEFAULT_NR_OF_SEATS)))
-            .andExpect(jsonPath("$.[*].body").value(hasItem(DEFAULT_BODY.toString())));
+            .andExpect(jsonPath("$.[*].body").value(hasItem(DEFAULT_BODY.toString())))
+            .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())))
+            .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.doubleValue())));
     }
 
     @Test
@@ -223,7 +237,9 @@ class CarResourceIT {
             .andExpect(jsonPath("$.since").value(DEFAULT_SINCE.toString()))
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()))
             .andExpect(jsonPath("$.nrOfSeats").value(DEFAULT_NR_OF_SEATS))
-            .andExpect(jsonPath("$.body").value(DEFAULT_BODY.toString()));
+            .andExpect(jsonPath("$.body").value(DEFAULT_BODY.toString()))
+            .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.doubleValue()))
+            .andExpect(jsonPath("$.latitude").value(DEFAULT_LATITUDE.doubleValue()));
     }
 
     @Test
@@ -256,7 +272,9 @@ class CarResourceIT {
             .since(UPDATED_SINCE)
             .price(UPDATED_PRICE)
             .nrOfSeats(UPDATED_NR_OF_SEATS)
-            .body(UPDATED_BODY);
+            .body(UPDATED_BODY)
+            .longitude(UPDATED_LONGITUDE)
+            .latitude(UPDATED_LATITUDE);
 
         restCarMockMvc
             .perform(
@@ -281,6 +299,8 @@ class CarResourceIT {
         assertThat(testCar.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testCar.getNrOfSeats()).isEqualTo(UPDATED_NR_OF_SEATS);
         assertThat(testCar.getBody()).isEqualTo(UPDATED_BODY);
+        assertThat(testCar.getLongitude()).isEqualTo(UPDATED_LONGITUDE);
+        assertThat(testCar.getLatitude()).isEqualTo(UPDATED_LATITUDE);
     }
 
     @Test
@@ -355,7 +375,8 @@ class CarResourceIT {
             .engineSize(UPDATED_ENGINE_SIZE)
             .price(UPDATED_PRICE)
             .nrOfSeats(UPDATED_NR_OF_SEATS)
-            .body(UPDATED_BODY);
+            .body(UPDATED_BODY)
+            .latitude(UPDATED_LATITUDE);
 
         restCarMockMvc
             .perform(
@@ -380,6 +401,8 @@ class CarResourceIT {
         assertThat(testCar.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testCar.getNrOfSeats()).isEqualTo(UPDATED_NR_OF_SEATS);
         assertThat(testCar.getBody()).isEqualTo(UPDATED_BODY);
+        assertThat(testCar.getLongitude()).isEqualTo(DEFAULT_LONGITUDE);
+        assertThat(testCar.getLatitude()).isEqualTo(UPDATED_LATITUDE);
     }
 
     @Test
@@ -405,7 +428,9 @@ class CarResourceIT {
             .since(UPDATED_SINCE)
             .price(UPDATED_PRICE)
             .nrOfSeats(UPDATED_NR_OF_SEATS)
-            .body(UPDATED_BODY);
+            .body(UPDATED_BODY)
+            .longitude(UPDATED_LONGITUDE)
+            .latitude(UPDATED_LATITUDE);
 
         restCarMockMvc
             .perform(
@@ -430,6 +455,8 @@ class CarResourceIT {
         assertThat(testCar.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testCar.getNrOfSeats()).isEqualTo(UPDATED_NR_OF_SEATS);
         assertThat(testCar.getBody()).isEqualTo(UPDATED_BODY);
+        assertThat(testCar.getLongitude()).isEqualTo(UPDATED_LONGITUDE);
+        assertThat(testCar.getLatitude()).isEqualTo(UPDATED_LATITUDE);
     }
 
     @Test

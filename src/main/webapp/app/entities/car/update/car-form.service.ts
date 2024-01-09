@@ -29,6 +29,8 @@ type CarFormGroupContent = {
   price: FormControl<ICar['price']>;
   nrOfSeats: FormControl<ICar['nrOfSeats']>;
   body: FormControl<ICar['body']>;
+  longitude: FormControl<ICar['longitude']>;
+  latitude: FormControl<ICar['latitude']>;
 };
 
 export type CarFormGroup = FormGroup<CarFormGroupContent>;
@@ -59,6 +61,8 @@ export class CarFormService {
       price: new FormControl(carRawValue.price),
       nrOfSeats: new FormControl(carRawValue.nrOfSeats),
       body: new FormControl(carRawValue.body),
+      longitude: new FormControl(carRawValue.longitude),
+      latitude: new FormControl(carRawValue.latitude),
     });
   }
 

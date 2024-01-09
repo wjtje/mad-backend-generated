@@ -18,6 +18,8 @@ export interface ICar {
   price?: number | null;
   nrOfSeats?: number | null;
   body?: keyof typeof Body | null;
+  longitude?: number | null;
+  latitude?: number | null;
   inspections?: IInspection[] | null;
   repairs?: IRepair[] | null;
   rentals?: IRental[] | null;
