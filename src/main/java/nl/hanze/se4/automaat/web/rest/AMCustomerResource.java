@@ -1,25 +1,18 @@
 package nl.hanze.se4.automaat.web.rest;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import nl.hanze.se4.automaat.domain.Customer;
 import nl.hanze.se4.automaat.domain.User;
 import nl.hanze.se4.automaat.repository.AMCustomerRepository;
-import nl.hanze.se4.automaat.repository.CustomerRepository;
 import nl.hanze.se4.automaat.repository.UserRepository;
 import nl.hanze.se4.automaat.security.SecurityUtils;
-import nl.hanze.se4.automaat.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import tech.jhipster.web.util.HeaderUtil;
-import tech.jhipster.web.util.ResponseUtil;
+import org.springframework.web.server.ResponseStatusException;
 
 /**
  * REST controller for managing {@link Customer}.
@@ -48,13 +41,18 @@ public class AMCustomerResource {
      * {@code GET  /customers/:id} : get the "id" customer.
      *
      * @param id the id of the customer to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the customer, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the customer, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/me")
     public ResponseEntity<Customer> getCurrentCustomer() {
         log.debug("REST request to get the logged in Customer");
-        Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().get());
-        Optional<Customer> customer = customerRepository.findOneWithUserId(user.get().getId());
-        return ResponseUtil.wrapOrNotFound(customer);
+        User user = userRepository
+            .findOneByLogin(SecurityUtils.getCurrentUserLogin().orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED)))
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Customer customer = customerRepository
+            .findOneWithUserId(user.getId())
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return ResponseEntity.ok().body(customer);
     }
 }
