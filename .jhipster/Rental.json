@@ -32,6 +32,7 @@
       "fieldValues": "ACTIVE,RESERVED,PICKUP,RETURNED"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "Rental",
   "relationships": [
     {
@@ -58,5 +59,6 @@
       "relationshipType": "many-to-one"
     }
   ],
-  "searchEngine": "no"
+  "searchEngine": "no",
+  "service": "serviceClass"
 }

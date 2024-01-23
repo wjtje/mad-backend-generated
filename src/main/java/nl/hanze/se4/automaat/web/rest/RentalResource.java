@@ -7,12 +7,14 @@ import java.util.Objects;
 import java.util.Optional;
 import nl.hanze.se4.automaat.domain.Rental;
 import nl.hanze.se4.automaat.repository.RentalRepository;
+import nl.hanze.se4.automaat.service.RentalQueryService;
+import nl.hanze.se4.automaat.service.RentalService;
+import nl.hanze.se4.automaat.service.criteria.RentalCriteria;
 import nl.hanze.se4.automaat.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -22,7 +24,6 @@ import tech.jhipster.web.util.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api/rentals")
-@Transactional
 public class RentalResource {
 
     private final Logger log = LoggerFactory.getLogger(RentalResource.class);
@@ -32,10 +33,16 @@ public class RentalResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    private final RentalService rentalService;
+
     private final RentalRepository rentalRepository;
 
-    public RentalResource(RentalRepository rentalRepository) {
+    private final RentalQueryService rentalQueryService;
+
+    public RentalResource(RentalService rentalService, RentalRepository rentalRepository, RentalQueryService rentalQueryService) {
+        this.rentalService = rentalService;
         this.rentalRepository = rentalRepository;
+        this.rentalQueryService = rentalQueryService;
     }
 
     /**
@@ -51,7 +58,7 @@ public class RentalResource {
         if (rental.getId() != null) {
             throw new BadRequestAlertException("A new rental cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Rental result = rentalRepository.save(rental);
+        Rental result = rentalService.save(rental);
         return ResponseEntity
             .created(new URI("/api/rentals/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -83,7 +90,7 @@ public class RentalResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Rental result = rentalRepository.save(rental);
+        Rental result = rentalService.update(rental);
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, rental.getId().toString()))
@@ -118,31 +125,7 @@ public class RentalResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<Rental> result = rentalRepository
-            .findById(rental.getId())
-            .map(existingRental -> {
-                if (rental.getCode() != null) {
-                    existingRental.setCode(rental.getCode());
-                }
-                if (rental.getLongitude() != null) {
-                    existingRental.setLongitude(rental.getLongitude());
-                }
-                if (rental.getLatitude() != null) {
-                    existingRental.setLatitude(rental.getLatitude());
-                }
-                if (rental.getFromDate() != null) {
-                    existingRental.setFromDate(rental.getFromDate());
-                }
-                if (rental.getToDate() != null) {
-                    existingRental.setToDate(rental.getToDate());
-                }
-                if (rental.getState() != null) {
-                    existingRental.setState(rental.getState());
-                }
-
-                return existingRental;
-            })
-            .map(rentalRepository::save);
+        Optional<Rental> result = rentalService.partialUpdate(rental);
 
         return ResponseUtil.wrapOrNotFound(
             result,
@@ -153,17 +136,27 @@ public class RentalResource {
     /**
      * {@code GET  /rentals} : get all the rentals.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of rentals in body.
      */
     @GetMapping("")
-    public List<Rental> getAllRentals(@RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload) {
-        log.debug("REST request to get all Rentals");
-        if (eagerload) {
-            return rentalRepository.findAllWithEagerRelationships();
-        } else {
-            return rentalRepository.findAll();
-        }
+    public ResponseEntity<List<Rental>> getAllRentals(RentalCriteria criteria) {
+        log.debug("REST request to get Rentals by criteria: {}", criteria);
+
+        List<Rental> entityList = rentalQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
+     * {@code GET  /rentals/count} : count all the rentals.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+     */
+    @GetMapping("/count")
+    public ResponseEntity<Long> countRentals(RentalCriteria criteria) {
+        log.debug("REST request to count Rentals by criteria: {}", criteria);
+        return ResponseEntity.ok().body(rentalQueryService.countByCriteria(criteria));
     }
 
     /**
@@ -175,7 +168,7 @@ public class RentalResource {
     @GetMapping("/{id}")
     public ResponseEntity<Rental> getRental(@PathVariable("id") Long id) {
         log.debug("REST request to get Rental : {}", id);
-        Optional<Rental> rental = rentalRepository.findOneWithEagerRelationships(id);
+        Optional<Rental> rental = rentalService.findOne(id);
         return ResponseUtil.wrapOrNotFound(rental);
     }
 
@@ -188,7 +181,7 @@ public class RentalResource {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRental(@PathVariable("id") Long id) {
         log.debug("REST request to delete Rental : {}", id);
-        rentalRepository.deleteById(id);
+        rentalService.delete(id);
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))

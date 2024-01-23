@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  * Spring Data JPA repository for the Inspection entity.
  */
 @Repository
-public interface InspectionRepository extends JpaRepository<Inspection, Long> {
+public interface InspectionRepository extends JpaRepository<Inspection, Long>, JpaSpecificationExecutor<Inspection> {
     default Optional<Inspection> findOneWithEagerRelationships(Long id) {
         return this.findOneWithToOneRelationships(id);
     }
