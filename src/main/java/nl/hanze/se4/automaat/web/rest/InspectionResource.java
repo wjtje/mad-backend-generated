@@ -7,12 +7,14 @@ import java.util.Objects;
 import java.util.Optional;
 import nl.hanze.se4.automaat.domain.Inspection;
 import nl.hanze.se4.automaat.repository.InspectionRepository;
+import nl.hanze.se4.automaat.service.InspectionQueryService;
+import nl.hanze.se4.automaat.service.InspectionService;
+import nl.hanze.se4.automaat.service.criteria.InspectionCriteria;
 import nl.hanze.se4.automaat.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -22,7 +24,6 @@ import tech.jhipster.web.util.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api/inspections")
-@Transactional
 public class InspectionResource {
 
     private final Logger log = LoggerFactory.getLogger(InspectionResource.class);
@@ -32,10 +33,20 @@ public class InspectionResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    private final InspectionService inspectionService;
+
     private final InspectionRepository inspectionRepository;
 
-    public InspectionResource(InspectionRepository inspectionRepository) {
+    private final InspectionQueryService inspectionQueryService;
+
+    public InspectionResource(
+        InspectionService inspectionService,
+        InspectionRepository inspectionRepository,
+        InspectionQueryService inspectionQueryService
+    ) {
+        this.inspectionService = inspectionService;
         this.inspectionRepository = inspectionRepository;
+        this.inspectionQueryService = inspectionQueryService;
     }
 
     /**
@@ -51,7 +62,7 @@ public class InspectionResource {
         if (inspection.getId() != null) {
             throw new BadRequestAlertException("A new inspection cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Inspection result = inspectionRepository.save(inspection);
+        Inspection result = inspectionService.save(inspection);
         return ResponseEntity
             .created(new URI("/api/inspections/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -85,7 +96,7 @@ public class InspectionResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Inspection result = inspectionRepository.save(inspection);
+        Inspection result = inspectionService.update(inspection);
         return ResponseEntity
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, inspection.getId().toString()))
@@ -120,31 +131,7 @@ public class InspectionResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<Inspection> result = inspectionRepository
-            .findById(inspection.getId())
-            .map(existingInspection -> {
-                if (inspection.getCode() != null) {
-                    existingInspection.setCode(inspection.getCode());
-                }
-                if (inspection.getOdometer() != null) {
-                    existingInspection.setOdometer(inspection.getOdometer());
-                }
-                if (inspection.getResult() != null) {
-                    existingInspection.setResult(inspection.getResult());
-                }
-                if (inspection.getPhoto() != null) {
-                    existingInspection.setPhoto(inspection.getPhoto());
-                }
-                if (inspection.getPhotoContentType() != null) {
-                    existingInspection.setPhotoContentType(inspection.getPhotoContentType());
-                }
-                if (inspection.getCompleted() != null) {
-                    existingInspection.setCompleted(inspection.getCompleted());
-                }
-
-                return existingInspection;
-            })
-            .map(inspectionRepository::save);
+        Optional<Inspection> result = inspectionService.partialUpdate(inspection);
 
         return ResponseUtil.wrapOrNotFound(
             result,
@@ -155,19 +142,27 @@ public class InspectionResource {
     /**
      * {@code GET  /inspections} : get all the inspections.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of inspections in body.
      */
     @GetMapping("")
-    public List<Inspection> getAllInspections(
-        @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
-    ) {
-        log.debug("REST request to get all Inspections");
-        if (eagerload) {
-            return inspectionRepository.findAllWithEagerRelationships();
-        } else {
-            return inspectionRepository.findAll();
-        }
+    public ResponseEntity<List<Inspection>> getAllInspections(InspectionCriteria criteria) {
+        log.debug("REST request to get Inspections by criteria: {}", criteria);
+
+        List<Inspection> entityList = inspectionQueryService.findByCriteria(criteria);
+        return ResponseEntity.ok().body(entityList);
+    }
+
+    /**
+     * {@code GET  /inspections/count} : count all the inspections.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+     */
+    @GetMapping("/count")
+    public ResponseEntity<Long> countInspections(InspectionCriteria criteria) {
+        log.debug("REST request to count Inspections by criteria: {}", criteria);
+        return ResponseEntity.ok().body(inspectionQueryService.countByCriteria(criteria));
     }
 
     /**
@@ -179,7 +174,7 @@ public class InspectionResource {
     @GetMapping("/{id}")
     public ResponseEntity<Inspection> getInspection(@PathVariable("id") Long id) {
         log.debug("REST request to get Inspection : {}", id);
-        Optional<Inspection> inspection = inspectionRepository.findOneWithEagerRelationships(id);
+        Optional<Inspection> inspection = inspectionService.findOne(id);
         return ResponseUtil.wrapOrNotFound(inspection);
     }
 
@@ -192,7 +187,7 @@ public class InspectionResource {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteInspection(@PathVariable("id") Long id) {
         log.debug("REST request to delete Inspection : {}", id);
-        inspectionRepository.deleteById(id);
+        inspectionService.delete(id);
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))

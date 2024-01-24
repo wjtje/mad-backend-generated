@@ -124,3 +124,5 @@ relationship OneToMany {
 relationship OneToOne {
     Customer{systemUser(login)} to User with builtInEntity
 }
+
+filter Rental, Inspection

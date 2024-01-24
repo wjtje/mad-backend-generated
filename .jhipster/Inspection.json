@@ -28,6 +28,7 @@
       "fieldType": "ZonedDateTime"
     }
   ],
+  "jpaMetamodelFiltering": true,
   "name": "Inspection",
   "relationships": [
     {
@@ -68,5 +69,6 @@
       "relationshipType": "many-to-one"
     }
   ],
-  "searchEngine": "no"
+  "searchEngine": "no",
+  "service": "serviceClass"
 }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  * Spring Data JPA repository for the Rental entity.
  */
 @Repository
-public interface RentalRepository extends JpaRepository<Rental, Long> {
+public interface RentalRepository extends JpaRepository<Rental, Long>, JpaSpecificationExecutor<Rental> {
     default Optional<Rental> findOneWithEagerRelationships(Long id) {
         return this.findOneWithToOneRelationships(id);
     }
